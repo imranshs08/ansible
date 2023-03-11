@@ -1,0 +1,9 @@
+---
+- name: Install Pacakages
+  hosts: ansible-target-1
+  become: true
+  tasks:
+  - name: Install Packages
+    yum:
+      name: ['git','make','gcc','tree','wget','gzip']
+      state: installed

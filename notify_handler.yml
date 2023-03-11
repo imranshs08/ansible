@@ -1,0 +1,16 @@
+---
+- name: Installed WebServer
+  hosts: ansible-target-1
+  become: true
+  tasks:
+    - name: Install HTTP Server
+      yum:
+        name: httpd
+        state: installed
+      notify: Start HTTP Service
+  handlers:
+    - name: Start HTTP Service
+      service:
+        name: httpd
+        state: started
+

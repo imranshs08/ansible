@@ -1,0 +1,9 @@
+---
+- name: Install Packages
+  hosts: server
+  become: true
+  roles:
+  - apache
+  - ntpd
+    # any_error_fatals: true
+  - named

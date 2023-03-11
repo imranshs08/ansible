@@ -1,0 +1,33 @@
+---
+- name: Install Java
+  hosts: ansible-target-1
+  become: true
+  tasks:
+  - name: Install Java on RHEL Machine
+    yum:
+      name: java
+      state: installed
+    when: ansible_os_family == "RedHat"
+  - name: Install Java on Debian Machine
+    apt:
+      name: default-jdk
+      state: present
+    when: ansible_os_family == "Debian"
+  - name: Download Tomatcat Module
+    get-url:
+      url: https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.72/bin/apache-tomcat-9.0.72.tar.gz
+      dest: /opt
+  - name: untar Apache Process
+    unarchive:
+      src: /opt/apache-tomcat-9.0.72
+      dest: /opt
+      remote_src: yes
+  - name: Add Execution Permission on Start File
+    file:
+      path: /opt/apache-tomcat-9.0.72/bin/startup.sh
+      mode: 0777
+  - name: Start Tomcat Services
+    shell: nohup ./startup.sh
+    args:
+      chdir: /opt/apache-tomcat-9.0.72/bin/
+

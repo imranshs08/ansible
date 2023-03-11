@@ -1,0 +1,27 @@
+-
+  hosts: ansible-target-1
+  become: yes
+  tasks:
+    - name: Install GIT packages
+      yum:
+        name: git
+        state: installed
+    - name: Ensure the directory is present 
+      file:
+        path: /tmp/git/
+        state: directory
+        force: yes
+    - name: "GIT Clone"
+      git:
+        repo: https://imranshs08:glpat-xo1Hhy_6xQKzTizFTyyj@gitlab.com/imranshs08/my-private-repo.git
+        dest: /tmp/git/
+        clone: yes
+        update: yes
+    - name: Copy Files
+      copy:
+        src: /tmp/git
+        dest: /home/ec2-user
+        mode: 0666
+        owner: ec2-user
+        group: ec2-user
+        remote_src: true

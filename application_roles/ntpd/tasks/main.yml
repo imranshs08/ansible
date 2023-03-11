@@ -1,0 +1,5 @@
+- name: Install Time Package
+  yum:
+    name: ntpd or chrnoy
+    state: present
+    ignore_errors: true

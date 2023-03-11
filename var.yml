@@ -1,0 +1,10 @@
+---
+- name: Create User with Var Method
+  hosts: ansible-target-1
+  vars:
+    user: 'Ahmad'
+  become: true
+  tasks:
+    - name: Create Users
+      user:
+        name: "{{ user }}"

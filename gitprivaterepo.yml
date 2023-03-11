@@ -1,0 +1,11 @@
+- hosts: local
+  shell: | 
+         ssh-add ~/.ssh/id_rsa
+- hosts: ansible-target-1
+  tasks:
+  - name: Private Repo Clone
+    git:
+       repo: https://github.com/imranshs08/private-repo.git
+       dest: /tmp/
+
+

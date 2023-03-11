@@ -1,0 +1,27 @@
+-
+  hosts: server
+  become: yes
+  vars_files:
+    - key.yml
+  tasks:
+    - name: Install GIT packages
+      yum:
+        name: git
+        state: installed
+    - name: Ensure the directory is present 
+      file:
+        path: /tmp/git/
+        state: directory
+        force: yes
+    - name: "GIT Clone"
+      git:
+        repo: https://imranshs08:{{ key }}@gitlab.com/imranshs08/my-private-repo.git
+        dest: /tmp/git/
+        clone: yes
+        #update: yes
+        #remote_dest: true
+    - name: Copy Files
+      copy:
+        src: /tmp/git
+        dest: /home/ec2-user
+        remote_src: true

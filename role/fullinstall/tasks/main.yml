@@ -1,0 +1,22 @@
+---
+- name: Install HTTPD Package
+  yum:
+    name: httpd
+    state: present
+- name: Install Python3 Module
+  yum:
+    name: python3
+    state: present
+- name: Started Httpd
+  service:
+    name: httpd
+    state: started
+      #- name: Open port for http firewalld
+      #firewalld:
+      #service: http
+      #permanent: true
+      #state: enabled
+- name: Restart firewalld service
+  service:
+    name: firewalld
+    state: reloaded
