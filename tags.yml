@@ -1,0 +1,14 @@
+---
+- name:  Setup Apache Server
+  hosts: server
+  tasks:
+  - name: Install HTTPD
+    yum:
+      name: httpd
+      state: present
+    tags: i-httpd
+  - name: Start HTTPD
+    service:
+      name: httpd
+      state: started
+    tags: s-httpd
