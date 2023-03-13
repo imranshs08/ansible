@@ -1,0 +1,16 @@
+---
+- name: Package Installation
+  hosts: server
+  become: true
+  vars:
+    pack: httpd
+  tasks:
+  - name: Install Package
+    yum:
+      name: "{{ pack }}"
+      state: present
+  - name: Start Service
+    service:
+      name: "{{ pack }}"
+      state: started
+    
