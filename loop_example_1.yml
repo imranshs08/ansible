@@ -1,0 +1,13 @@
+---
+- name: Install Multiple Package
+  hosts: server
+  become: true
+  vars:
+    packages: [ftp,telnet,htop]
+  tasks:
+  - name: Install Packages
+    yum:
+      name: "{{ packages }}"
+      state: present
+
+

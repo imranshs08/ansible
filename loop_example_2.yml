@@ -1,0 +1,11 @@
+--- 
+- name: Create User thriugh Loop
+  hosts: server
+  become: true
+  vars:
+    users: [jerry,kramer,elaine]
+  tasks:
+  - name: Create Users
+    user:
+      name: "{{ item }}"
+    with_items: "{{ users }}"
