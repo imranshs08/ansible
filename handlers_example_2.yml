@@ -1,0 +1,19 @@
+---
+- name: Eanble service on firewalld
+  hosts: server
+  tasks:
+  - name: Open Port for HTTP
+    firewalld:
+      service: http
+      permanet: true
+      state: enabled
+    notify: firewalled reload
+  - name: Ensure firewalld is running
+    service:
+      name: firewalld
+      state: started
+  handlers:
+  - name: firewalld reload
+    service:
+      name: firewalld
+      state: reloaded
